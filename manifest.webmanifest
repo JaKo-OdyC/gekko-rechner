@@ -1,0 +1,18 @@
+{
+  "name": "GEKKO — Ab wann lohnt sich ein Weiterbildungsmentor?",
+  "short_name": "GEKKO Rechner",
+  "description": "Überschlagsrechnung für Speditions- und Logistikbetriebe: Was müsste ein Weiterbildungsmentor im Jahr erreichen, damit sich seine Stunden rechnen?",
+  "lang": "de",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#FFFBF3",
+  "theme_color": "#17444A",
+  "icons": [
+    { "src": "zeichen/zeichen-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "zeichen/zeichen-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "zeichen/zeichen-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
