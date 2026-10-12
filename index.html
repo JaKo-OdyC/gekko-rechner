@@ -759,8 +759,9 @@ function rechnen(){
 
   $("leiste_fuss").innerHTML =
     "Die Zahlen oben sagen, was <b>nötig wäre</b>, nicht was eintritt. " +
-    "Der Mentor kostet <b>" + de(kosten, 0) + " Euro</b> im Jahr und bindet <b>" + de(stunden, 0) +
-    " Stunden</b>. Ein Ausfalltag ist mit <b>" + de(kAU, 0) + " Euro</b> angesetzt: " +
+    "Der Mentor bindet <b>" + de(stunden, 0) + " Stunden</b> im Jahr; mit " + de(zahl("shm"), 0) +
+    " Euro je Stunde bewertet sind das <b>" + de(kosten, 0) + " Euro</b> — eine Größe, " +
+    "nicht zwei. Ein Ausfalltag ist mit <b>" + de(kAU, 0) + " Euro</b> angesetzt: " +
     de(lohn, 0) + " Euro je Stunde × " + de(vert, 1).replace(",0", "") + " Stunden Vertretung. " +
     "Krankenstand " + de(KRANKENSTAND, 1) + " Prozent (Branche), umgerechnet auf " + ARBEITSTAGE +
     " Arbeitstage statt 365 Kalendertage.";
@@ -768,7 +769,10 @@ function rechnen(){
   // ---- Satz oben
   $("frage").textContent = "Der Mentor trägt sich rechnerisch, wenn im Jahr eines davon gelingt – gerechnet für die " +
     g.gruppeAdj + " Gruppe (" + g.kurz + "):";
-  var satz = "Er kostet " + de(kosten, 0) + " Euro im Jahr und bindet " + de(stunden, 0) + " Stunden.";
+  // Eine Groesse, nicht zwei: kosten IST stunden * shm. "Kostet X und bindet Y" las sich
+  // als zwei Belastungen und widersprach dem Grundsatz der Arbeitsmappe.
+  var satz = "Er bindet " + de(stunden, 0) + " Stunden im Jahr — mit " +
+             de(zahl("shm"), 0) + " Euro je Stunde bewertet sind das " + de(kosten, 0) + " Euro.";
   if(sperre !== null){
     satz += " " + sperre;
   } else {
@@ -810,9 +814,15 @@ function rechnen(){
   }
   var personal = (ng * zahl("sg") + nk * zahl("sk")) * 1650;
   if(personal > 0){
-    k += " Die Stelle des Mentors kostet <b>" + de(kosten / personal * 100, 2) + " Prozent</b> Ihrer jährlichen Personalkosten.";
+    // Beide Seiten des Anteils sind bewertete Zeit. "Kostet" behauptete eine Auszahlung,
+    // die es nicht gibt.
+    k += " Die bewertete Zeit des Mentors entspricht <b>" + de(kosten / personal * 100, 2) +
+         " Prozent</b> Ihrer jährlichen Personalkosten.";
   }
-  k += " Geld und Zeit werden nie miteinander verrechnet: Die Ausfalltage sind mit einem Vertretungssatz bewertet, sie fließen nicht als Auszahlung.";
+  k += " Geld und Zeit werden nie als Auszahlung verrechnet: Die Stunden des Mentors wie " +
+      "die Ausfalltage sind mit einem Satz bewertet, damit sie vergleichbar werden — " +
+      "ausgezahlt wird davon nichts. Welche Auszahlungen in die Kosten je Neueinstellung " +
+      "eingehen, bestimmt der Umschalter darüber.";
   $("kontext").innerHTML = k;
 
   // ---- Hinweise in den Eingabefeldern
@@ -843,9 +853,12 @@ function ansagen(g, sperre, sA, sG, sK, mangel){
       text = sperre;
     } else {
       var teile = [];
-      if(sA !== null) teile.push(de(sA, 1) + " " + EREIGNIS_KURZ);
-      if(sG !== null) teile.push(de(sG, 1) + " Ausfalltage in der Gruppe");
-      if(sK !== null) teile.push(de(sK, 2) + " Ausfalltage je Beschäftigtem");
+      // zeigeWert, nicht de: Sonst hoert ein Bildschirmleser "0,0", wo die Karte "<0,1"
+      // zeigt - und das liest sich als "kostet nichts". Beim ersten Mal nur im sichtbaren
+      // Satz behoben, hier nachgetragen.
+      if(sA !== null) teile.push(zeigeWert(sA, 1) + " " + EREIGNIS_KURZ);
+      if(sG !== null) teile.push(zeigeWert(sG, 1) + " Ausfalltage in der Gruppe");
+      if(sK !== null) teile.push(zeigeWert(sK, 2) + " Ausfalltage je Beschäftigtem");
       text = teile.length
         ? "Schwelle " + g.name + ": " + teile.join(" oder ") + "."
         : "Keine Schwelle berechenbar.";
@@ -1170,6 +1183,12 @@ function seiteVerdrahten(){
       if(text.indexOf(MARKE) < 0){ throw new Error("die geladene Datei ist nicht der Rechner"); }
       // Den Zustand des Bildschirms in die Kopie einsetzen. Ohne das enthielte die
       // Kopie die Auslieferungswerte, und die Zusage wäre falsch.
+      // Das "\u003c" muss als diese SECHS ZEICHEN in der Datei stehen, nicht als
+      // spitze Klammer. Es schuetzt die gespeicherte Kopie: Ein Feldinhalt, der ein
+      // schliessendes script-Tag enthaelt, wuerde sonst deren script-Element beenden.
+      // Diesen Hinweis NICHT mit einem echten Tag bebildern - das beendet das Element
+      // auch im Kommentar, weil der HTML-Parser keine JavaScript-Kommentare kennt.
+      // Nicht "aufraeumen".
       var zustand = JSON.stringify(zustandLesen()).replace(/</g, "\u003c");
       var blob = new Blob([text.replace(MARKE, "var MITGEGEBEN = " + zustand + ";")],
                           {type: "text/html;charset=utf-8"});
