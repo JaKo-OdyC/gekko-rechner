@@ -518,7 +518,7 @@
 <!--HOLEN-ENDE-->
 
 <p class="fuss">
-  Was diese Seite nicht leistet: Sie ist kein Wirkungsnachweis. Ob ein Weiterbildungsmentor die genannten Schwellen erreicht, ist nicht belegt; die Begleitforschung des Bundesinstituts für Berufsbildung weist dazu ausdrücklich keine Effektgrößen aus. Die Seite rechnet ausschließlich im Browser, sendet keine Daten an fremde Server, lädt von dort nichts nach und setzt keine Cookies. Das Logo liegt als Bild in der Datei selbst; gesetzt wird in Schriften, die auf Ihrem Rechner schon vorhanden sind — damit keine Schrift von fremden Servern nachgeladen wird.
+  Was diese Seite nicht leistet: Sie ist kein Wirkungsnachweis. Ob ein Weiterbildungsmentor die genannten Schwellen erreicht, ist nicht belegt; die Transferstudie zum betrieblichen Weiterbildungsmentoring, die das Institut für Gerontologische Forschung im Auftrag des Bundesinstituts für Berufsbildung vorgelegt hat (Mai 2025), weist dazu ausdrücklich keine Effektgrößen aus — befragt wurden 20 Mentoren. Die Seite rechnet ausschließlich im Browser, sendet keine Daten an fremde Server, lädt von dort nichts nach und setzt keine Cookies. Das Logo liegt als Bild in der Datei selbst; gesetzt wird in Schriften, die auf Ihrem Rechner schon vorhanden sind — damit keine Schrift von fremden Servern nachgeladen wird.
   <br><br>GEKKO – Qualifizierung und Etablierung von Weiterbildungsmentorinnen und -mentoren. Gefördert vom Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend, wissenschaftlich-administrativ begleitet vom Bundesinstitut für Berufsbildung.
   <a href="https://www.linkedin.com/company/gekko-wbm/" target="_blank" rel="noopener noreferrer">GEKKO auf LinkedIn</a> ·
   <a href="https://www.gekko-projekt.de/" target="_blank" rel="noopener noreferrer">gekko-projekt.de</a>
@@ -820,7 +820,7 @@ function rechnen(){
   $("h_gruppen").textContent = eigen
     ? "Sie geben beide Gruppen selbst ein, die Gesamtzahl ist ihre Summe. Auszubildende und Inhaber tragen Sie nur ein, wenn der Mentor sie betreut."
     : "Die Anzahl folgt der Betriebsart und ist deshalb gesperrt. Für eigene Zahlen oben umschalten. Die Löhne sind immer änderbar; gerechnet wird mit 1.650 bezahlten Stunden im Jahr. Sie bestimmen zugleich, was ein Ausfalltag kostet.";
-  $("h_stunden").textContent = "Die Begleitforschung beobachtet rund drei Stunden je Woche, die Hälfte der Mentoren kommt mit zwei aus, in Ausnahmen wird ein ganzer Tag eingesetzt. Wie sich diese Stunden auf Betreuung und Planung verteilen, sagt die Studie nicht; die Aufteilung der beiden Auswahlfelder ist gesetzt." +
+  $("h_stunden").textContent = "Die Transferstudie 2025 beobachtet bei 20 befragten Mentoren rund drei Stunden je Woche, die Hälfte kommt mit zwei aus, in Ausnahmen wird ein ganzer Tag eingesetzt. Wie sich diese Stunden auf Betreuung und Planung verteilen, sagt die Studie nicht; die Aufteilung der beiden Auswahlfelder ist gesetzt." +
     (stundenEigen ? " Sie haben die Stunden selbst eingetragen, die Auswahl oben wirkt nicht mehr." : "");
   $("h_mentor").textContent = "Ein Mentor ist meist eine erfahrene Fachkraft oder Schichtleitung. Ein Referenzwert für diese Rolle liegt nicht vor; vorbelegt mit dem kaufmännischen Satz. Die Vertretungsstunden sagen, was ein Ausfalltag kostet: " +
     "aktuell " + de(zahl(g.idLohn), 0) + " Euro je Stunde × " + de(vert, 1).replace(",0", "") + " = " + de(kAU, 0) + " Euro für die " + g.gruppeAdj + " Gruppe.";

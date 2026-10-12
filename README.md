@@ -15,10 +15,11 @@ vermiedene Neueinstellungen, Ausfalltage in der Gruppe, Ausfalltage je Beschäft
 davon genügt; sie zählen nicht zusammen.
 
 Die Seite behauptet **keine Wirkung**. Ob ein Weiterbildungsmentor diese Schwellen
-erreicht, ist nicht belegt — die Begleitforschung des Bundesinstituts für Berufsbildung
-weist dazu ausdrücklich keine Effektgrößen aus. Jeder Eingabewert ist in der Quellentabelle
-am Fuß der Seite als Referenzwert, Ableitung oder offengelegte Annahme ausgewiesen, mit
-Fundstelle.
+erreicht, ist nicht belegt: Die Transferstudie zum betrieblichen Weiterbildungsmentoring,
+die das Institut für Gerontologische Forschung im Auftrag des Bundesinstituts für
+Berufsbildung vorgelegt hat (Mai 2025), weist dazu ausdrücklich keine Effektgrößen aus —
+befragt wurden 20 Mentoren. Jeder Eingabewert ist in der Quellentabelle am Fuß der Seite
+als Referenzwert, Ableitung oder offengelegte Annahme ausgewiesen, mit Fundstelle.
 
 ## Was sie mit Daten tut
 
