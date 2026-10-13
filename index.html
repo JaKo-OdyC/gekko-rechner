@@ -1183,13 +1183,16 @@ function seiteVerdrahten(){
       if(text.indexOf(MARKE) < 0){ throw new Error("die geladene Datei ist nicht der Rechner"); }
       // Den Zustand des Bildschirms in die Kopie einsetzen. Ohne das enthielte die
       // Kopie die Auslieferungswerte, und die Zusage wäre falsch.
-      // Das "\u003c" muss als diese SECHS ZEICHEN in der Datei stehen, nicht als
-      // spitze Klammer. Es schuetzt die gespeicherte Kopie: Ein Feldinhalt, der ein
+      // Hier muessen ZWEI Backslashes stehen. Mit einem liest JavaScript bereits
+      // beim Parsen eine Unicode-Escape und die Ersatz-Zeichenkette ist schlicht
+      // "<" — die Zeile waere ein Leerlauf. Mit zweien entstehen zur Laufzeit die
+      // sechs Zeichen, die dann in der Kopie stehen und dort harmlos sind.
+      // Nachgemessen 2026-10-12: tri/pruefe_escape.js. Es schuetzt die gespeicherte Kopie: Ein Feldinhalt, der ein
       // schliessendes script-Tag enthaelt, wuerde sonst deren script-Element beenden.
       // Diesen Hinweis NICHT mit einem echten Tag bebildern - das beendet das Element
       // auch im Kommentar, weil der HTML-Parser keine JavaScript-Kommentare kennt.
       // Nicht "aufraeumen".
-      var zustand = JSON.stringify(zustandLesen()).replace(/</g, "\u003c");
+      var zustand = JSON.stringify(zustandLesen()).replace(/</g, "\\u003c");
       var blob = new Blob([text.replace(MARKE, "var MITGEGEBEN = " + zustand + ";")],
                           {type: "text/html;charset=utf-8"});
       var adresse = URL.createObjectURL(blob);
